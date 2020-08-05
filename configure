@@ -469,7 +469,7 @@ if [[ $arch == x86_64* ]]; then
 else
 	BUILD_CMD=($CC -o /dev/null -x c $CPPFLAGS $CFLAGS $LDFLAGS)
 fi
-BUILD_CMD+=(-I/usr/local/include -L/usr/local/lib)
+# BUILD_CMD+=(-I/usr/local/include -L/usr/local/lib)
 BUILD_CMD+=(-lucp -lucs -Lucx-1.8.1/install/lib -Iucx-1.8.1/install/include)
 
 # IDXD uses Intel specific instructions.
