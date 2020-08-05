@@ -1269,7 +1269,7 @@ work_fn(void *arg)
 
 		if (worker->lcore == g_master_core && tsc_current > tsc_next_print) {
 			tsc_next_print += g_tsc_rate;
-			print_periodic_performance();
+			// print_periodic_performance();
 		}
 
 		if (tsc_current > tsc_end) {
