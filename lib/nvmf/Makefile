@@ -30,7 +30,7 @@
 #  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-
+CFLAGS += "-Iucx-1.8.1/install/include"
 SPDK_ROOT_DIR := $(abspath $(CURDIR)/../..)
 include $(SPDK_ROOT_DIR)/mk/spdk.common.mk
 
@@ -71,7 +71,7 @@ endif
 endif
 
 SPDK_MAP_FILE = $(abspath $(CURDIR)/spdk_nvmf.map)
-CFLAGS += "-Iucx-1.8.1/install/include"
+
 
 
 
