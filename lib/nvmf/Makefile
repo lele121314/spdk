@@ -67,10 +67,10 @@ C_SRCS += fc.c fc_ls.c
 CFLAGS += -I$(CURDIR)
 ifneq ($(strip $(CONFIG_FC_PATH)),)
 CFLAGS += -I$(CONFIG_FC_PATH)
-CFLAGS += -Iucx-1.8.1/install/include
 endif
 endif
 
 SPDK_MAP_FILE = $(abspath $(CURDIR)/spdk_nvmf.map)
+CFLAGS += -Iucx-1.8.1/install/include
 
 include $(SPDK_ROOT_DIR)/mk/spdk.lib.mk
