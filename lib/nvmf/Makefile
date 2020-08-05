@@ -73,9 +73,6 @@ endif
 SPDK_MAP_FILE = $(abspath $(CURDIR)/spdk_nvmf.map)
 CFLAGS += -Iucx-1.8.1/install/include
 
-LDFLAGS += -lucp
-LDFLAGS += -lucs
-LDFLAGS += -Lucx-1.8.1/install/lib
 
 
 include $(SPDK_ROOT_DIR)/mk/spdk.lib.mk
