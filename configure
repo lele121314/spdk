@@ -463,7 +463,7 @@ for i in "$@"; do
 			exit 1
 	esac
 done
-CFLAGS += (-Iucx-1.8.1/install/include)
+CFLAGS+=(-Iucx-1.8.1/install/include)
 if [[ $arch == x86_64* ]]; then
 	BUILD_CMD=($CC -o /dev/null -x c $CPPFLAGS $CFLAGS $LDFLAGS -march=native)
 else
