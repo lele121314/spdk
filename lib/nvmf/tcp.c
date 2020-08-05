@@ -47,7 +47,7 @@
 #include "spdk_internal/nvme_tcp.h"
 
 #include "nvmf_internal.h"
-#include "ucp/api/ucp.h"
+#include <ucp/api/ucp.h>
 
 #define NVMF_TCP_MAX_ACCEPT_SOCK_ONE_TIME 16
 #define SPDK_NVMF_TCP_DEFAULT_MAX_SOCK_PRIORITY 6
