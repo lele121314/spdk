@@ -50,6 +50,7 @@
 
 #include "nvme_internal.h"
 #include "spdk_internal/rdma.h"
+#include <stdio.h>
 
 #define NVME_RDMA_TIME_OUT_IN_MS 2000
 #define NVME_RDMA_RW_BUFFER_SIZE 131072
@@ -1370,6 +1371,7 @@ _nvme_rdma_ctrlr_connect_qpair(struct spdk_nvme_ctrlr *ctrlr, struct spdk_nvme_q
 static int
 nvme_rdma_ctrlr_connect_qpair(struct spdk_nvme_ctrlr *ctrlr, struct spdk_nvme_qpair *qpair)
 {
+	printf("nvme_rdma_ctrlr_connect_qpair\n");
 	int rc;
 	int retry_count = 0;
 
@@ -1812,6 +1814,7 @@ nvme_rdma_ctrlr_create_qpair(struct spdk_nvme_ctrlr *ctrlr,
 static void
 nvme_rdma_ctrlr_disconnect_qpair(struct spdk_nvme_ctrlr *ctrlr, struct spdk_nvme_qpair *qpair)
 {
+	printf("nvme_rdma_ctrlr_disconnect_qpair\n");
 	struct nvme_rdma_qpair *rqpair = nvme_rdma_qpair(qpair);
 	struct nvme_rdma_ctrlr *rctrlr = NULL;
 	struct nvme_rdma_cm_event_entry *entry, *tmp;
@@ -1867,6 +1870,7 @@ static void nvme_rdma_qpair_abort_reqs(struct spdk_nvme_qpair *qpair, uint32_t d
 static int
 nvme_rdma_ctrlr_delete_io_qpair(struct spdk_nvme_ctrlr *ctrlr, struct spdk_nvme_qpair *qpair)
 {
+	printf("nvme_rdma_ctrlr_delete_io_qpair\n");
 	struct nvme_rdma_qpair *rqpair;
 
 	rqpair = nvme_rdma_qpair(qpair);
@@ -1890,6 +1894,7 @@ static struct spdk_nvme_qpair *
 nvme_rdma_ctrlr_create_io_qpair(struct spdk_nvme_ctrlr *ctrlr, uint16_t qid,
 				const struct spdk_nvme_io_qpair_opts *opts)
 {
+	printf("nvme_rdma_ctrlr_create_io_qpair\n");
 	return nvme_rdma_ctrlr_create_qpair(ctrlr, qid, opts->io_queue_size, opts->qprio,
 					    opts->io_queue_requests,
 					    opts->delay_cmd_submit);
@@ -1898,6 +1903,7 @@ nvme_rdma_ctrlr_create_io_qpair(struct spdk_nvme_ctrlr *ctrlr, uint16_t qid,
 static int
 nvme_rdma_ctrlr_enable(struct spdk_nvme_ctrlr *ctrlr)
 {
+	printf("nvme_rdma_ctrlr_enable\n");
 	/* do nothing here */
 	return 0;
 }
@@ -1908,6 +1914,7 @@ static struct spdk_nvme_ctrlr *nvme_rdma_ctrlr_construct(const struct spdk_nvme_
 		const struct spdk_nvme_ctrlr_opts *opts,
 		void *devhandle)
 {
+	printf("nvme_rdma_ctrlr_construct\n");
 	struct nvme_rdma_ctrlr *rctrlr;
 	union spdk_nvme_cap_register cap;
 	union spdk_nvme_vs_register vs;
@@ -2032,6 +2039,7 @@ destruct_ctrlr:
 static int
 nvme_rdma_ctrlr_destruct(struct spdk_nvme_ctrlr *ctrlr)
 {
+	printf("nvme_rdma_ctrlr_destruct\n");
 	struct nvme_rdma_ctrlr *rctrlr = nvme_rdma_ctrlr(ctrlr);
 	struct nvme_rdma_cm_event_entry *entry;
 
@@ -2063,6 +2071,7 @@ static int
 nvme_rdma_qpair_submit_request(struct spdk_nvme_qpair *qpair,
 			       struct nvme_request *req)
 {
+	printf("nvme_rdma_qpair_submit_request\n");
 	struct nvme_rdma_qpair *rqpair;
 	struct spdk_nvme_rdma_req *rdma_req;
 	struct ibv_send_wr *wr;
@@ -2100,6 +2109,7 @@ nvme_rdma_qpair_reset(struct spdk_nvme_qpair *qpair)
 static void
 nvme_rdma_qpair_abort_reqs(struct spdk_nvme_qpair *qpair, uint32_t dnr)
 {
+	printf("nvme_rdma_qpair_abort_reqs\n");
 	struct spdk_nvme_rdma_req *rdma_req, *tmp;
 	struct spdk_nvme_cpl cpl;
 	struct nvme_rdma_qpair *rqpair = nvme_rdma_qpair(qpair);
@@ -2324,6 +2334,7 @@ static int
 nvme_rdma_qpair_process_completions(struct spdk_nvme_qpair *qpair,
 				    uint32_t max_completions)
 {
+	printf("nvme_rdma_qpair_process_completions\n");
 	struct nvme_rdma_qpair		*rqpair = nvme_rdma_qpair(qpair);
 	int				rc = 0, batch_size;
 	struct ibv_cq			*cq;
@@ -2403,6 +2414,7 @@ nvme_rdma_ctrlr_get_max_xfer_size(struct spdk_nvme_ctrlr *ctrlr)
 static uint16_t
 nvme_rdma_ctrlr_get_max_sges(struct spdk_nvme_ctrlr *ctrlr)
 {
+	printf("nvme_rdma_ctrlr_get_max_sges\n");
 	struct nvme_rdma_ctrlr *rctrlr = nvme_rdma_ctrlr(ctrlr);
 
 	return rctrlr->max_sge;
@@ -2413,6 +2425,7 @@ nvme_rdma_qpair_iterate_requests(struct spdk_nvme_qpair *qpair,
 				 int (*iter_fn)(struct nvme_request *req, void *arg),
 				 void *arg)
 {
+	printf("nvme_rdma_qpair_iterate_requests\n");
 	struct nvme_rdma_qpair *rqpair = nvme_rdma_qpair(qpair);
 	struct spdk_nvme_rdma_req *rdma_req, *tmp;
 	int rc;
@@ -2434,6 +2447,7 @@ nvme_rdma_qpair_iterate_requests(struct spdk_nvme_qpair *qpair,
 static void
 nvme_rdma_admin_qpair_abort_aers(struct spdk_nvme_qpair *qpair)
 {
+	printf("nvme_rdma_admin_qpair_abort_aers\n");
 	struct spdk_nvme_rdma_req *rdma_req, *tmp;
 	struct spdk_nvme_cpl cpl;
 	struct nvme_rdma_qpair *rqpair = nvme_rdma_qpair(qpair);
@@ -2496,6 +2510,7 @@ nvme_rdma_poll_group_free_pollers(struct nvme_rdma_poll_group *group)
 static struct spdk_nvme_transport_poll_group *
 nvme_rdma_poll_group_create(void)
 {
+	printf("nvme_rdma_poll_group_create\n");
 	struct nvme_rdma_poll_group	*group;
 	struct ibv_context		**contexts;
 	int i = 0;
@@ -2590,6 +2605,7 @@ nvme_rdma_resize_cq(struct nvme_rdma_qpair *rqpair, struct nvme_rdma_poller *pol
 static int
 nvme_rdma_poll_group_connect_qpair(struct spdk_nvme_qpair *qpair)
 {
+	printf("nvme_rdma_poll_group_connect_qpair\n");
 	struct nvme_rdma_qpair		*rqpair = nvme_rdma_qpair(qpair);
 	struct nvme_rdma_poll_group	*group = nvme_rdma_poll_group(qpair->poll_group);
 	struct nvme_rdma_poller		*poller;
@@ -2617,6 +2633,7 @@ nvme_rdma_poll_group_connect_qpair(struct spdk_nvme_qpair *qpair)
 static int
 nvme_rdma_poll_group_disconnect_qpair(struct spdk_nvme_qpair *qpair)
 {
+	printf("nvme_rdma_poll_group_disconnect_qpair\n");
 	struct nvme_rdma_qpair			*rqpair = nvme_rdma_qpair(qpair);
 	struct nvme_rdma_poll_group		*group;
 	struct nvme_rdma_destroyed_qpair	*destroyed_qpair;
@@ -2669,6 +2686,7 @@ static int
 nvme_rdma_poll_group_remove(struct spdk_nvme_transport_poll_group *tgroup,
 			    struct spdk_nvme_qpair *qpair)
 {
+	printf("nvme_rdma_poll_group_remove\n");
 	if (qpair->poll_group_tailq_head == &tgroup->connected_qpairs) {
 		return nvme_poll_group_disconnect_qpair(qpair);
 	}
@@ -2694,6 +2712,7 @@ static int64_t
 nvme_rdma_poll_group_process_completions(struct spdk_nvme_transport_poll_group *tgroup,
 		uint32_t completions_per_qpair, spdk_nvme_disconnected_qpair_cb disconnected_qpair_cb)
 {
+	printf("nvme_rdma_poll_group_process_completions\n");
 	struct spdk_nvme_qpair			*qpair, *tmp_qpair;
 	struct nvme_rdma_destroyed_qpair	*qpair_tracker, *tmp_qpair_tracker;
 	struct nvme_rdma_qpair			*rqpair;
@@ -2780,6 +2799,7 @@ nvme_rdma_poll_group_process_completions(struct spdk_nvme_transport_poll_group *
 static int
 nvme_rdma_poll_group_destroy(struct spdk_nvme_transport_poll_group *tgroup)
 {
+	printf("nvme_rdma_poll_group_destroy\n");
 	struct nvme_rdma_poll_group		*group = nvme_rdma_poll_group(tgroup);
 	struct nvme_rdma_destroyed_qpair	*qpair_tracker, *tmp_qpair_tracker;
 	struct nvme_rdma_qpair			*rqpair;
