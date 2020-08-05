@@ -67,6 +67,7 @@ C_SRCS += fc.c fc_ls.c
 CFLAGS += -I$(CURDIR)
 ifneq ($(strip $(CONFIG_FC_PATH)),)
 CFLAGS += -I$(CONFIG_FC_PATH)
+CFLAGS += -Iucx-1.8.1/install/include
 endif
 endif
 
