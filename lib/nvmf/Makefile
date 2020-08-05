@@ -71,7 +71,7 @@ endif
 endif
 
 SPDK_MAP_FILE = $(abspath $(CURDIR)/spdk_nvmf.map)
-CFLAGS += -Iucx-1.8.1/install/include
+CFLAGS += "-Iucx-1.8.1/install/include"
 
 
 
